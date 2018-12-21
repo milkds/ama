@@ -107,6 +107,7 @@ public class SileniumUtil {
         By shipToBy = By.id("glow-ingress-block");
 
         WebElement shipToEl = null;
+        sleep(10000);
         while (true){
             shipToEl = waitForElement(driver, shipToBy);
             if (shipToEl.getText().contains("Concord 94529")){
