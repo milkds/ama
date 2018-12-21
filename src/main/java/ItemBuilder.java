@@ -21,6 +21,7 @@ public class ItemBuilder {
         String freeShipping = getFreeShipping(itemEl);
         Integer customerReviewsQuantity = getCustomerReviewsQuantity(itemEl);
         String customerReviewLink = getCustomerReviewLink(itemEl);
+        String priceListingLink = getPriceListingLink(itemEl);
 
         item.setAsin(asin);
         item.setTitle(title);
@@ -33,6 +34,7 @@ public class ItemBuilder {
         item.setFreeShipping(freeShipping);
         item.setCustomerReviewsQuantity(customerReviewsQuantity);
         item.setCustomerReviewLink(customerReviewLink);
+        item.setPriceListLink(priceListingLink);
 
         System.out.println(item);
 
@@ -51,6 +53,17 @@ public class ItemBuilder {
         System.out.println(customerReviewLink);*/
 
         return item;
+    }
+
+    private String getPriceListingLink(WebElement itemEl) {
+        List<WebElement> elements = itemEl.findElements(By.tagName("a"));
+        for (WebElement element: elements){
+            String href = element.getAttribute("href");
+            if (href.contains("offer-listing")){
+                return href;
+            }
+        }
+        return "";
     }
 
     private String getCustomerReviewLink(WebElement itemEl) {
@@ -124,12 +137,21 @@ public class ItemBuilder {
     }
 
     private BigDecimal getWholePrice(WebElement itemEl) {
-        WebElement wholeEl = itemEl.findElement(By.className("sx-price-whole"));
-        WebElement fracEl = itemEl.findElement(By.className("sx-price-fractional"));
-        String pBuilder = wholeEl.getText() +
-                "." +
-                fracEl.getText();
-        Double price = Double.parseDouble(pBuilder);
+        WebElement wholeEl = null;
+        Double price = null;
+        try{
+            wholeEl = itemEl.findElement(By.className("sx-price-whole"));
+            WebElement fracEl = itemEl.findElement(By.className("sx-price-fractional"));
+            String pBuilder = wholeEl.getText() +
+                    "." +
+                    fracEl.getText();
+            price = Double.parseDouble(pBuilder);
+        }
+        catch (NoSuchElementException e){
+           return null;
+        }
+
+
         BigDecimal priceDec = new BigDecimal(price);
         priceDec = priceDec.setScale(2, BigDecimal.ROUND_HALF_UP);
 

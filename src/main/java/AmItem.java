@@ -43,6 +43,9 @@ public class AmItem {
     @Column(name = "REVIEWS_LINK")
      private String customerReviewLink;
 
+    @Column(name = "PRICE_LISTING_LINK")
+    private String priceListLink;
+
     @Column(name = "SKU")
      private String sku;
 
@@ -55,12 +58,13 @@ public class AmItem {
                 ", link='" + link + '\'' +
                 ", brand='" + brand + '\'' +
                 ", wholePrice=" + wholePrice +
-                ", suggestedRetailPrice='" + suggestedRetailPrice + '\'' +
+                ", suggestedRetailPrice=" + suggestedRetailPrice +
                 ", imgLink='" + imgLink + '\'' +
                 ", prime='" + prime + '\'' +
                 ", freeShipping='" + freeShipping + '\'' +
-                ", customerReviewsQuantity='" + customerReviewsQuantity + '\'' +
+                ", customerReviewsQuantity=" + customerReviewsQuantity +
                 ", customerReviewLink='" + customerReviewLink + '\'' +
+                ", priceListLink='" + priceListLink + '\'' +
                 ", sku='" + sku + '\'' +
                 '}';
     }
@@ -167,5 +171,13 @@ public class AmItem {
 
     public void setFreeShipping(String freeShipping) {
         this.freeShipping = freeShipping;
+    }
+
+    public String getPriceListLink() {
+        return priceListLink;
+    }
+
+    public void setPriceListLink(String priceListLink) {
+        this.priceListLink = priceListLink;
     }
 }
