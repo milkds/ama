@@ -89,7 +89,9 @@ public class ItemBuilder {
                 break;
             }
         }
-
+        if (linkText.length()==0){
+            return 0;
+        }
         return Integer.parseInt(linkText);
     }
 
