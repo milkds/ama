@@ -92,6 +92,7 @@ public class ItemBuilder {
         if (linkText.length()==0){
             return 0;
         }
+        linkText = linkText.replaceAll(",", "");
         return Integer.parseInt(linkText);
     }
 
@@ -131,6 +132,7 @@ public class ItemBuilder {
         }
         String sugPriceStr = sugPriceEl.getText();
         sugPriceStr = sugPriceStr.replace("$", "");
+        sugPriceStr = sugPriceStr.replaceAll(",", "");
         Double doublePrice = Double.parseDouble(sugPriceStr);
         BigDecimal priceDec = new BigDecimal(doublePrice);
         priceDec = priceDec.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -147,6 +149,7 @@ public class ItemBuilder {
             String pBuilder = wholeEl.getText() +
                     "." +
                     fracEl.getText();
+            pBuilder = pBuilder.replaceAll(",", "");
             price = Double.parseDouble(pBuilder);
         }
         catch (NoSuchElementException e){

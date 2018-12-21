@@ -10,10 +10,29 @@ import java.util.regex.Pattern;
 public class AmaTest {
 
     public static void main(String[] args) {
-        //testMatcher();
-        testAma2();
+        testMatcher2();
+     //   testAma2();
     }
 
+    private static void testMatcher2() {
+        String text = "WeatherTech (444331-443052 FloorLiner, Front/Rear, Black WeatherTech (444331-443052 FloorLiner, Front/Rear, Black";
+       // String text = "WeatherTech 443242 FloorLiner WeatherTech 4432 FloorLiner";
+        //String text = "Weathertech 44481-1-2 Front and Rear Floorliners for 2013-2017 Honda Accord Sedan";
+        Pattern pattern = Pattern.compile("[0-9]{0,6}-?[0-9]{0,6}-?[0-9]{0,6}");
+
+        Matcher matcher = pattern.matcher(text);
+
+        // System.out.println(matcher.lookingAt());
+
+        while (matcher.find()) {
+            int start=matcher.start();
+            int end=matcher.end();
+            if (!(text.substring(start,end).matches("[0-9]{4}"))&& start!=end) {
+                System.out.println(text.substring(start, end));
+            }
+        }
+
+    }
 
 
     public static void testAma(){
